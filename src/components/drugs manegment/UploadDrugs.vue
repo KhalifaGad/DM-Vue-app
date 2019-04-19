@@ -105,9 +105,7 @@ export default {
   margin-left: 2px;
   margin-right: 2px;
 }
-.dark-f-color {
-  color: #3e3f44;
-}
+
 .content-title {
   color: #212229;
   font-weight: 700;

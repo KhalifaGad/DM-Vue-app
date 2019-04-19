@@ -1070,3 +1070,6 @@ textarea.custom-file-input.parsley-error~.invalid-tooltip {
   color: #ff3535;
   font-weight: 700;
 }
+.dark-f-color {
+  color: #3e3f44;
+}

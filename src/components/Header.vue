@@ -73,7 +73,7 @@
           <IosArrowDownIcon w="10px" class="custom-icon"/>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <router-link to="/order-list" active-class="active" class="dropdown-item">Order List</router-link>
+          <router-link to="/orders-list" active-class="active" class="dropdown-item">Order List</router-link>
           <div class="dropdown-divider"></div>
           <router-link
             to="/pending-orders"

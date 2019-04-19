@@ -13,10 +13,10 @@
 
     <div class="content-label pd-t-25 mg-b-5">Your store drugs list</div>
     <p class="mg-b-20">this a list of all the drugs that yu uploded to your store.</p>
-    <div class="row t">
-        <div class="search-drugs col col-md-5">
-            <input type="text" v-model="filters[0].value" placeholder="search drug names" >
-        </div>
+    <div class="row">
+      <div class="search-drugs col col-md-5">
+        <input type="text" v-model="filters[0].value" placeholder="search drug names">
+      </div>
     </div>
     <data-tables
       id="table"
@@ -33,8 +33,6 @@
         :key="title.label"
       ></el-table-column>
     </data-tables>
-    <!--     <table id="datatable1" class="display responsive nowrap">
-    </table>-->
   </div>
 </template>
 
@@ -51,10 +49,12 @@ export default {
         stripe: true,
         border: true
       },
-      filters: [{
-          value: '',
-          prop: 'drugName'
-      }]
+      filters: [
+        {
+          value: "",
+          prop: "drugName"
+        }
+      ]
     };
   },
   components: {
@@ -71,24 +71,24 @@ export default {
 .dark-f-color {
   color: #3e3f44;
 }
-.search-drugs{
-    position: absolute;
-    top: 200px;
-    right: -250px;
+.search-drugs {
+  position: absolute;
+  top: 200px;
+  right: -250px;
 }
-.search-drugs input{
-    border: none;
-    width: 180px;
-    padding-left: 15px;
-    padding-bottom: 5px;
-    border-bottom: #d5d8dd solid;
-    font-size: 16px;
-    transition: border-color 0.5s ease-in-out;
+.search-drugs input {
+  border: none;
+  width: 180px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  border-bottom: #d5d8dd solid;
+  font-size: 16px;
+  transition: border-color 0.5s ease-in-out;
 }
 .search-drugs input:focus,
-.search-drugs input:hover{
-    outline: none;
-    border-bottom: #ff3535 solid;
+.search-drugs input:hover {
+  outline: none;
+  border-bottom: #ff3535 solid;
 }
 </style>
 
