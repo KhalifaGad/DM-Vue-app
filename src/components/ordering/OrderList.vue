@@ -12,7 +12,7 @@
     <h2 class="content-title">Orders List</h2>
     <div class="content-label pd-t-25 mg-b-5">Your store orders list</div>
     <p class="mg-b-20">this a list for all your store orders.</p>
-    
+
     <div class="table-container">
       <div class="tableControl pd-t-10 pd-r-10 pd-l-10">
         <div class="table-tabs btn-group">
@@ -100,22 +100,22 @@ export default {
   },
   methods: {
     toggleTabs(val) {
-        this.activeTab = val
-        this.filters[1].value = val
+      this.activeTab = val;
+      this.filters[1].value = val;
     },
-    rowClicked(order){
-        this.$message({
-            showClose: true,
-            center: true,
-            duration: 0,
-            message: order.orderId
-            });
+    rowClicked(order) {
+      this.$message({
+        showClose: true,
+        center: true,
+        duration: 0,
+        message: order.orderId
+      });
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
 .custom-icon {
   margin-left: 2px;
   margin-right: 2px;
@@ -136,7 +136,7 @@ export default {
 }
 .tableControl input:focus,
 .tableControl input:hover {
-  border-bottom: #53545a solid;
+  border-bottom: #4709ac solid;
 }
 .table-container {
   border: 1px solid #dee2e6;
@@ -179,7 +179,7 @@ export default {
   opacity: 1;
 }
 .table-tab:hover:not(.active) {
-  opacity: .8;
+  opacity: 0.8;
 }
 .table-tabs {
   width: 85%;
@@ -190,6 +190,6 @@ export default {
     display: none
 } */
 .table-tab + .table-tab {
-    margin-left: 3px;
+  margin-left: 3px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <router-link class="navbar-brand" to="/">
-      <img src="../assets/img/logo.png" alt="Drug Market" width="226">
+      <img src="../../assets/img/logo.png" alt="Drug Market" width="226">
     </router-link>
     <button
       class="navbar-toggler"
@@ -153,7 +153,7 @@
           aria-expanded="false"
         >
           <div class="img-user">
-            <img class="img-user" src="../assets/img/profile.jpg" alt="user img">
+            <img class="img-user" src="../../assets/img/profile.jpg" alt="user img">
           </div>
         </a>
         <div
@@ -162,7 +162,7 @@
         >
           <div class="header-profile">
             <div class="img-user">
-              <img src="../assets/img/profile.jpg" alt>
+              <img src="../../assets/img/profile.jpg" alt>
             </div>
             <h6>Storeii</h6>
           </div>
