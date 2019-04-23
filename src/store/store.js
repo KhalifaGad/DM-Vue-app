@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import signupClientInfo from './modules/signup'
+import signupClientInfo from './modules/personalInfo'
 
 Vue.use(Vuex)
 
