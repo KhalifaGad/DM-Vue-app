@@ -1,23 +1,31 @@
 <template>
-  <div class="az-signin-wrapper">
+  <div class="az-signin-wrapper mg-30">
     <div class="az-card-signin">
       <img class="az-logo" src="../assets/img/logo.png" alt="drug market">
       <div class="az-signin-header">
         <h2>Welcome back!</h2>
         <h4>Please sign in to continue</h4>
-
-        <form action="index.html">
+        <p
+          class="pd-t-10 pd-l-5 invalid-info"
+          v-show="invalid"
+        >Invalid email or password check the caps lock!</p>
+        <form>
           <div class="form-group">
             <label>Email</label>
-            <input type="text" class="form-control" placeholder="Enter your email">
+            <input type="text" v-model="email" class="form-control" placeholder="Enter your email">
           </div>
           <!-- form-group -->
           <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" placeholder="Enter your password">
+            <input
+              type="password"
+              v-model="password"
+              class="form-control"
+              placeholder="Enter your password"
+            >
           </div>
           <!-- form-group -->
-          <button class="btn btn-az-primary btn-block">Sign In</button>
+          <button class="btn btn-az-primary btn-block" @click.prevent="login">Sign In</button>
         </form>
       </div>
       <!-- az-signin-header -->
@@ -27,7 +35,7 @@
         </p>
         <p>
           Don't have an account?
-          <a href="page-signup.html">Request Account</a>
+          <router-link to="/signup">Request Account</router-link>
         </p>
       </div>
       <!-- az-signin-footer -->
@@ -36,10 +44,32 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      invalid: false
+    };
+  },
+  computed: {
+    login() {
+      if (this.email == "kkhalifa.gad@gmail.com" && this.password == "abc") {
+        this.invalid = false;
+        this.$router.push({ name: "Home" });
+      } else {
+        this.invalid = true;
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
+.invalid-info {
+  color: #ff3535;
+  font-size: 12px;
+}
 .az-logo {
   max-width: 220px;
 }
@@ -78,7 +108,7 @@ export default {};
 .az-signin-header h4 {
   font-weight: 400;
   color: #212229;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .az-signin-header label {

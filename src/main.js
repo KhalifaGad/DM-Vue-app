@@ -10,12 +10,14 @@ import locale from 'element-ui/lib/locale'
 import VueDataTables from 'vue-data-tables'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store/store'
+import vueResource from 'vue-resource'
 
 Vue.component('v-select', vSelect)
 locale.use(lang)
 Vue.use(ElementUI)
 Vue.use(VueDataTables)
 Vue.use(require('vue-shortkey'))
+Vue.use(vueResource)
 
 // eslint-disable-next-line no-new
 new Vue({

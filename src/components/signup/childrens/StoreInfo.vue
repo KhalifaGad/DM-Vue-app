@@ -10,9 +10,9 @@
             <span class="tx-danger">*</span>
           </label>
           <input
-            id="firstname"
+            id="storeName"
             class="form-control"
-            name="firstname"
+            v-model="storeName"
             placeholder="Enter Store name"
             type="text"
             required
@@ -23,14 +23,14 @@
             City:
             <span class="tx-danger">*</span>
           </label>
-          <v-select id="vSelectIdSignup" :options="cities" v-model="selectedCity"/>
+          <v-select id="vSelectCitySignup" :options="cities" v-model="selectedCity"/>
         </div>
         <div class="col-md-5 col-lg-4 mg-t-20 mg-md-t-0">
           <label>
             Area:
             <span class="tx-danger">*</span>
           </label>
-          <v-select id="vSelectIdSignup" :options="areas" v-model="selectedArea" />
+          <v-select id="vSelectAreaSignup" :options="areas" v-model="selectedArea" />
         </div>
       </div>
     </section>
@@ -38,18 +38,31 @@
 </template>
 
 <script>
-import { eventBus } from "../../../main.js"
-
 export default {
-  data() {
-    return {
-      areas: ["Smouha", "Sidi Gaber", "Al Agmy", "Kafr Abdo", "Roushdy"],
-      selectedArea: "Pick area",
-      cities: ["Alexandria", "Cairo", "Swiss", "South Sinai", "Mansoura"],
-      selectedCity: "Pick city",
-      birthDate: ""
-    };
+  computed: {
+    areas(){ return this.$store.getters.getAreas
+    },
+    selectedArea: {
+      set(val) { this.$store.dispatch('setSelectedArea', val) },
+      get() { return this.$store.getters.getSelectedArea }
+    },
+    cities() { return this.$store.getters.getCities 
+    },
+    selectedCity: {
+      set(val) { this.$store.dispatch('setSelectedCity', val) },
+      get() { return this.$store.getters.getSelectedCity }
+    },
+    storeName: {
+      set(val) { this.$store.dispatch('setStoreName', val) },
+      get() { return this.$store.getters.getStoreName }
+    }
   },
+  methods: {
+    Fn(){
+    document.getElementById('vSelectIdSignup').id = 'vSelectIdSignupError';  
+    //document.getElementById('vSelectIdSignup').style.backgroundColor = 'red';
+  }
+  }
 };
 </script>
 

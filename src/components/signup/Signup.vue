@@ -13,7 +13,7 @@
         <div class="az-signup-footer">
           <p>
             Already have an account?
-            <a href="page-signin.html">Sign In</a>
+            <router-link to="/login">Sign In</router-link>
           </p>
         </div>
         <!-- az-signin-footer -->
@@ -60,7 +60,7 @@
               <component :is="selectedComponent"></component>
             </keep-alive>
           </transition>
-          <section class="control-btns">
+          <section class="control-btns" v-show="selectedComponent != 'FinishedReg'">
             <div class="previous-conrtol">
               <button
                 class="control-btn"
@@ -74,6 +74,7 @@
               <transition name="fade" mode="out-in">
                 <button
                   class="control-btn-finish"
+                  @click="finish"
                   v-if="selectedComponent == 'Confirmation'"
                   key="finish"
                 >Finish</button>
@@ -98,6 +99,7 @@
 import PersonalInfo from "./childrens/PersonalInfo";
 import StoreInfo from "./childrens/StoreInfo";
 import Confirmation from "./childrens/Confirmation";
+import FinishedReg from "./childrens/FinishedReg";
 import { mapGetters } from "vuex";
 import validationHelper from "./validationHelper";
 
@@ -119,13 +121,17 @@ export default {
       fName: "getFName",
       lName: "getLName",
       phone: "getPhone",
-      email: "getEmail"
+      email: "getEmail",
+      selectedArea: "getSelectedArea",
+      selectedCity: "getSelectedCity",
+      storeName: "getStoreName"
     })
   },
   components: {
     PersonalInfo,
     StoreInfo,
-    Confirmation
+    Confirmation,
+    FinishedReg
   },
   methods: {
     personalInfoSelected() {
@@ -135,9 +141,9 @@ export default {
       this.selectedComponent = "PersonalInfo";
     },
     storeInfoSelected() {
-      if(!this.pesonalInfoChecked){
-        this.personValidationFn()
-        return
+      if (!this.pesonalInfoChecked) {
+        this.personValidationFn();
+        return;
       }
       this.storeInfoColor = "#ff3535";
       this.prsonalInfoColor = "#00cccc";
@@ -145,9 +151,13 @@ export default {
       this.selectedComponent = "StoreInfo";
     },
     confirmationSelected() {
-      if(!this.pesonalInfoChecked){
-        this.personValidationFn()
-        return
+      if (!this.pesonalInfoChecked) {
+        this.personValidationFn();
+        return;
+      }
+      if (!this.storeInfoChecked) {
+        this.sotreValidationFn();
+        return;
       }
       this.prsonalInfoColor = "#00cccc";
       this.storeInfoColor = "#00cccc";
@@ -156,9 +166,9 @@ export default {
     },
     next() {
       if (this.selectedComponent == "PersonalInfo") {
-        this.personValidationFn()? this.storeInfoSelected() : null ;
+        this.personValidationFn() ? this.storeInfoSelected() : null;
       } else {
-        this.confirmationSelected()
+        this.sotreValidationFn() ? this.confirmationSelected() : null;
       }
     },
     previous() {
@@ -166,25 +176,53 @@ export default {
         return;
       }
       if (this.selectedComponent == "StoreInfo") {
-        this.personalInfoSelected()
+        this.personalInfoSelected();
       } else {
-        this.storeInfoSelected()
+        this.storeInfoSelected();
       }
     },
-    personValidationFn(){
+    personValidationFn() {
       if (
-          !validationHelper.personalInfoValidation(
-            this.fName,
-            this.lName,
-            this.phone,
-            this.email
-          )
-        ) {
-          this.pesonalInfoChecked = false
-          return false
-        }
-        this.pesonalInfoChecked = true
-        return true
+        !validationHelper.personalInfoValidation(
+          this.fName,
+          this.lName,
+          this.phone,
+          this.email
+        )
+      ) {
+        this.pesonalInfoChecked = false;
+        return false;
+      }
+      this.pesonalInfoChecked = true;
+      return true;
+    },
+    sotreValidationFn() {
+      if (
+        !validationHelper.storeInfoValidation(
+          this.storeName,
+          this.selectedCity,
+          this.selectedArea
+        )
+      ) {
+        this.storeInfoChecked = false;
+        return false;
+      }
+      this.storeInfoChecked = true;
+      return true;
+    },
+    finish() {
+      this.$http.post("http://localhost:3030/api/signing/signup", {
+        fName: this.fName,
+        lName: this.lName,
+        phone: this.phone,
+        email: this.email,
+        selectedArea: this.selectedArea,
+        selectedCity: this.selectedCity,
+        storeName: this.storeName
+      }).then(res => {
+        console.log(res);
+      });
+      this.selectedComponent = "FinishedReg";
     }
   }
 };

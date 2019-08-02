@@ -1020,9 +1020,17 @@ textarea.custom-file-input.parsley-error~.invalid-tooltip {
   border-radius: 0px;
 }
 
-#vSelectIdSignup .vs__dropdown-toggle {
-  border-radius: 0px;
+#vSelectCitySignup .vs__dropdown-toggle,
+#vSelectAreaSignup .vs__dropdown-toggle {
+  border-radius: 0px; 
   height: 36px;
+}
+
+#vSelectCityError .vs__dropdown-toggle,
+#vSelectAreaError .vs__dropdown-toggle {
+  border-radius: 0px; 
+  height: 36px;
+  border-color: red;
 }
 
 #vSelectId .vs__dropdown-option.vs__dropdown-option--highlight {

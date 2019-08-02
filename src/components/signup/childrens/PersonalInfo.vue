@@ -72,9 +72,6 @@
 </template>
 
 <script>
-import { eventBus } from "../../../main.js";
-import { mapMutations } from 'vuex';
-import { mapActions } from 'vuex';
 
 export default {
   computed: {
