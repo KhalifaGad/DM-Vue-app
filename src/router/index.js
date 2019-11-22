@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Header from '../components/shared/Header.vue'
 import Footer from '../components/shared/Footer.vue'
-import Home from '../components/Home'
+import Home from '../views/Home'
 import EditProfile from '../components/profile/EditProfile'
 import UploadDrugs from '../components/drugs manegment/UploadDrugs'
 import DrugsList from '../components/drugs manegment/DrugsList.vue'
-import OrderList from '../components/ordering/OrderList.vue'
+import OrderList from '../views/OrderList.vue'
 import Login from '../components/Login.vue'
 import Signup from '../components/signup/Signup.vue'
 
@@ -38,8 +38,8 @@ export default new Router({
     }
   },
   {
-    path: '/edit-profile',
-    name: 'EditProfile',
+    path: '/profiles',
+    name: 'Profiles',
     components: {
       header: Header,
       main: EditProfile,
@@ -67,6 +67,24 @@ export default new Router({
   {
     path: '/orders-list',
     name: 'OrderList',
+    components: {
+      header: Header,
+      main: OrderList,
+      footer: Footer
+    }
+  },
+  {
+    path: '/orders-list/pending',
+    name: 'PendingOrderList',
+    components: {
+      header: Header,
+      main: OrderList,
+      footer: Footer
+    }
+  },
+  {
+    path: '/orders-list/active',
+    name: 'ActiveOrderList',
     components: {
       header: Header,
       main: OrderList,

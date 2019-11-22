@@ -483,23 +483,23 @@ export default {
   titles: [
     {
       label: 'Order ID',
-      prop: 'orderId'
+      prop: 'code'
     },
     {
       label: 'Status',
-      prop: 'status'
+      prop: 'OrderStatus'
     },
     {
-      label: 'Pharmacy Name',
+      label: 'Pharmacy',
       prop: 'pharmacyName'
     },
     {
-      label: 'Order Date',
-      prop: 'orderDate'
+      label: 'Store',
+      prop: 'storeName'
     },
     {
       label: 'Price',
-      prop: 'price'
+      prop: 'total'
     },
     {
       label: 'Payment',

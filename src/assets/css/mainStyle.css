@@ -1040,7 +1040,9 @@ textarea.custom-file-input.parsley-error~.invalid-tooltip {
 .el-pagination .el-select .el-input .el-input__inner {
   border-radius: 0%;
 }
-
+.cell {
+  text-align: center !important;
+}
 .el-table--border td,
 .el-table--border th {
   border-left-width: 0px;

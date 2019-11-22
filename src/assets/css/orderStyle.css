@@ -1,0 +1,214 @@
+.order-modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000094;
+    transition: opacity 1s ease;
+}
+
+.modal-body {
+    background-color: #fff;
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    width: 70%;
+    height: 80%;
+    padding: 0;
+    box-shadow: 0 2px 8px 3px;
+    transition: all 0.2s ease-in;
+    z-index: 999;
+}
+
+.modal-tabs {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    background-color: #ced4da;
+    /* width: 100%; */
+}
+
+.modal-tabs>button {
+    outline: none;
+    width: 10%;
+    height: 40px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #fff;
+    border-width: 0px;
+    opacity: 0.6;
+    color: black;
+    font-weight: 500;
+}
+
+.modal-tabs>button.active {
+    font-weight: bold;
+    opacity: 1;
+    outline: none;
+}
+
+.close-btn {
+    align-self: flex-end;
+    background-color: #ced4da !important;
+    color: #ff3535 !important;
+    font-weight: bolder !important;
+    margin-left: auto;
+}
+
+.data-section {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    overflow-y: auto;
+}
+
+.order-data,
+.pharmacy-store-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-data>.left,
+.order-data>.right,
+.store-section,
+.pharmacy-section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.order-section>hr,
+.store-section>hr,
+.pharmacy-section>hr {
+    width: 8%;
+    margin-right: 92%;
+    border-width: 3px;
+    margin-top: -5px;
+    border-color: #ada7a7;
+}
+
+.order-section>hr {
+    width: 4%;
+    margin-right: 96%;
+}
+
+.order-data>.left,
+.order-data>.right,
+.pharmacy-data,
+.store-data {
+    margin-left: 8%;
+}
+
+.order-data>.left>p>span,
+.order-data>.right>p>span,
+.pharmacy-data>p>span,
+.store-data>p>span {
+    font-weight: bolder;
+    margin-right: 2%;
+}
+
+.order-data>.left>p,
+.order-data>.right>p,
+.pharmacy-data>p,
+.store-data>p {
+    font-weight: 400;
+    margin-right: 2%;
+}
+
+.separator {
+    width: 50%;
+    border-width: 2px;
+    border-color: #ada7a7;
+}
+
+.sc-table>.action-list,
+.sc-table>.pagination-wrap {
+    text-align: center !important;
+}
+
+.sc-table>.action-list>span+span {
+    margin-left: 10px;
+}
+.cell {
+    text-align: center !important;
+}
+.el-pagination {
+    white-space: nowrap;
+    padding: 2px 5px;
+    color: #303133;
+    font-weight: 700;
+}
+.el-pagination {
+    margin-top: 10px;
+}
+.el-pagination button:disabled {
+    color: #C0C4CC;
+    background-color: #FFF;
+    cursor: not-allowed;
+}
+.el-pagination .btn-prev {
+    padding-right: 12px;
+}
+pagination .btn-prev {
+    background: center center no-repeat #FFF;
+    background-size: 16px;
+    cursor: pointer;
+    margin: 0;
+    color: #303133;
+}
+.el-pager {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    list-style: none;
+    font-size: 0;
+}
+.el-pager, .el-pager li {
+    vertical-align: top;
+    margin: 0;
+    display: inline-block;
+}
+.el-pager, .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev {
+    padding: 0;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.sc-table .pagination-wrap {
+    text-align: center;
+}
+.el-pagination button, .el-pagination span:not([class*=suffix]) {
+    display: inline-block;
+    font-size: 13px;
+    min-width: 35.5px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.el-pagination__sizes {
+    margin: 0 10px 0 0;
+    font-weight: 400;
+    color: #606266;
+}
+.el-pagination__total {
+    margin-right: 10px;
+    font-weight: 400;
+    color: #606266;
+}

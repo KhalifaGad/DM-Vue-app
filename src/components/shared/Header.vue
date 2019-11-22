@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <router-link class="navbar-brand" to="/">
-      <img src="../../assets/img/logo.png" alt="Drug Market" width="226">
+      <img src="../../assets/img/logo.png" alt="Drug Market" width="226" />
     </router-link>
     <button
       class="navbar-toggler"
@@ -21,7 +21,12 @@
           <i class="fa fa-home"></i> Home
         </a>
       </router-link>
-      <li class="nav-item dropdown">
+      <router-link tag="li" active-class="active" to="/profiles" class="nav-item" exact>
+        <a class="nav-link">
+          <i class="fa fa-user"></i> Profiles
+        </a>
+      </router-link>
+      <!-- <li class="nav-item dropdown">
         <a
           class="nav-link with-sub"
           href="#"
@@ -31,15 +36,15 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <i class="fa fa-user"></i> Profile
-          <IosArrowDownIcon w="10px" class="custom-icon"/>
+          <i class="fa fa-user"></i> Profiles
+          <IosArrowDownIcon w="10px" class="custom-icon" />
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <router-link to="/profile-page" active-class="active" class="dropdown-item">Profile Page</router-link>
           <div class="dropdown-divider"></div>
           <router-link to="/edit-profile" active-class="active" class="dropdown-item">Edit Profile</router-link>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item dropdown">
         <a
           class="nav-link with-sub"
@@ -51,7 +56,7 @@
           aria-expanded="false"
         >
           <i class="fa fa-cog"></i> Drugs Mangement
-          <IosArrowDownIcon w="10px" class="custom-icon"/>
+          <IosArrowDownIcon w="10px" class="custom-icon" />
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <router-link to="/drugs-list" active-class="active" class="dropdown-item">Drug List</router-link>
@@ -70,18 +75,27 @@
           aria-expanded="false"
         >
           <i class="fa fa-cube"></i> Orders
-          <IosArrowDownIcon w="10px" class="custom-icon"/>
+          <IosArrowDownIcon w="10px" class="custom-icon" />
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <router-link to="/orders-list" active-class="active" class="dropdown-item">Order List</router-link>
+          <router-link
+            :to="{name: 'OrderList', params: {activeTab: ''}}"
+            active-class="active"
+            class="dropdown-item"
+            exact
+          >Order List</router-link>
           <div class="dropdown-divider"></div>
           <router-link
-            to="/pending-orders"
+            :to="{name: 'PendingOrderList', params: {activeTab: 'PENDING'}}"
             active-class="active"
             class="dropdown-item"
           >Pending Orders</router-link>
           <div class="dropdown-divider"></div>
-          <router-link to="/active-orders" active-class="active" class="dropdown-item">Active Orders</router-link>
+          <router-link
+            :to="{name: 'ActiveOrderList', params: {activeTab: 'ACTIVE'}}"
+            active-class="active"
+            class="dropdown-item"
+          >Active Orders</router-link>
         </div>
       </li>
     </ul>
@@ -153,7 +167,7 @@
           aria-expanded="false"
         >
           <div class="img-user">
-            <img class="img-user" src="../../assets/img/profile.jpg" alt="user img">
+            <img class="img-user" src="../../assets/img/profile.jpg" alt="user img" />
           </div>
         </a>
         <div
@@ -162,18 +176,18 @@
         >
           <div class="header-profile">
             <div class="img-user">
-              <img src="../../assets/img/profile.jpg" alt>
+              <img src="../../assets/img/profile.jpg" alt />
             </div>
             <h6>Storeii</h6>
           </div>
           <a href class="dropdown-item">
             <i class="fa fa-user"></i> My Profile
           </a>
-          <div class="dropdown-divider"/>
+          <div class="dropdown-divider" />
           <a href class="dropdown-item">
             <i class="fa fa-edit"></i> Edit Profile
           </a>
-          <div class="dropdown-divider"/>
+          <div class="dropdown-divider" />
           <a href="#" class="dropdown-item">
             <i class="fa fa-sign-out"></i> Sign Out
           </a>
@@ -348,14 +362,28 @@ export default {
   object-fit: cover;
   border-radius: 100%;
 }
-.main-nav > .nav-item + .nav-item::after {
+/* .border-left::after {
   content: "";
   position: absolute;
   height: 18px;
   left: 0;
-  border-left: 1px solid #ced4da;
+  border-left: 1px solid #ced4da ;
   bottom: 10px;
+} */
+.main-nav > li{
+  position: relative;
 }
+.main-nav > li:not(:first-child):after{
+  content: " ";
+  position: absolute;
+  border-left: 1.5px #ced4da solid;
+  top: 30%;
+  left: 0;
+  height: 40%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .dropdown-divider {
   margin-left: 0.5em;
   margin-right: 0.5em;
