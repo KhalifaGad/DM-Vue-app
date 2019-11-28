@@ -1008,7 +1008,7 @@ textarea.custom-file-input.parsley-error~.invalid-tooltip {
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #969dab;
-  margin-bottom: 5px;
+  margin-bottom: 2%;
 }
 
 .content-breadcrumb span:first-child a {

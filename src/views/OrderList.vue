@@ -149,8 +149,6 @@ export default {
     },
     async rowClicked(selectedOrder) {
       let order = await getOrder(this, selectedOrder.code);
-      order.storeName = selectedOrder.storeName;
-      order.pharmacyName = selectedOrder.pharmacyName;
       order.code = selectedOrder.code;
       this.order = order;
 
@@ -259,11 +257,7 @@ export default {
 .table-tabs {
   width: 85%;
 }
-/* .el-message .el-icon-info {
-    color: #909399;
-    ui element styling
-    display: none
-} */
+
 .table-tab + .table-tab {
   margin-left: 3px;
 }

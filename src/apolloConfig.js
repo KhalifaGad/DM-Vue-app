@@ -9,6 +9,22 @@ import {
 } from 'apollo-cache-inmemory'
 import Vue from 'vue'
 import VueApollo from 'vue-apollo'
+import {
+    ApolloLink,
+    concat,
+    split
+} from 'apollo-link';
+
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+    // add the authorization to the headers
+    operation.setContext({
+      headers: {
+        authorization: "admin",
+      }
+    });
+    return forward(operation);
+  })
 
 const httpLink = createHttpLink({
     uri: 'http://test.drug1market.com/graphql'
@@ -17,14 +33,16 @@ const httpLink = createHttpLink({
 const cache = new InMemoryCache()
 
 const apolloClient = new ApolloClient({
-    link: httpLink,
+    link: concat(authMiddleware, httpLink),
     cache
 })
 
 Vue.use(VueApollo)
 
 const apolloProvider = new VueApollo({
-    defaultClient: apolloClient,
+    defaultClient: apolloClient
 })
 
-export { apolloProvider }
+export {
+    apolloProvider
+}

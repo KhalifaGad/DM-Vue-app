@@ -179,12 +179,14 @@ async function getOrder(context, code) {
                     area
                     street
                     phone
+                    pharmacyName
                 }
                 to{
                     city
                     area
                     street
                     phone
+                    storeName
                 }
                 DMFees
                 walletDiscount
@@ -215,6 +217,212 @@ async function getOrder(context, code) {
     return order
 }
 
+async function getPharmacies(context) {
+    let pharmacies
+    await context.$apollo.query({
+        query: gql `query{
+            admin_pharmacies{
+                pharmacyName
+                id
+                code
+            }
+        }`
+    }).then((res) => {
+        pharmacies = res.data.admin_pharmacies
+    }).catch(err => console.log(err))
+
+    return pharmacies
+}
+async function getStores(context) {
+    let stores
+    await context.$apollo.query({
+        query: gql `query{
+            admin_stores{
+                storeName
+                id
+            }
+        }`
+    }).then((res) => {
+        stores = res.data.admin_stores
+    }).catch(err => console.log(err))
+
+    return stores
+}
+
+async function getPharmacy(context, id) {
+    let pharmacy
+    await context.$apollo.query({
+        query: gql `query{
+            admin_pharmacy(id: "${id}"){
+                city
+                area
+                street
+                phone
+                code
+                email
+            }
+        }`
+    }).then((res) => {
+        pharmacy = res.data.admin_pharmacy
+    }).catch(err => console.log(err))
+
+    return pharmacy
+}
+
+async function getStore(context, id) {
+    let store
+    await context.$apollo.query({
+        query: gql `query{
+            admin_store(id: "${id}"){
+                city
+                area
+                street
+                phone
+                email
+            }
+        }`
+    }).then((res) => {
+        store = res.data.admin_store
+    }).catch(err => console.log(err))
+
+    return store
+}
+
+async function getStoreOrders(context, id) {
+    let storeOrders
+    await context.$apollo.query({
+        query: gql `query{
+            admin_storeOrders(id: "${id}"){
+                code
+                from{
+                pharmacyName
+                }
+                orderStatus
+                total
+                createdAt
+            }
+        }`
+    }).then((res) => {
+        storeOrders = res.data.admin_storeOrders
+    }).catch(err => console.log(err))
+
+    return storeOrders
+}
+
+async function getPharmacyOrders(context, id) {
+    let pharmacyOrders
+    await context.$apollo.query({
+        query: gql `query{
+            admin_pharmacyOrders(id: "${id}"){
+                code
+                to{
+                storeName
+                }
+                orderStatus
+                total
+                createdAt
+            }
+        }`
+    }).then((res) => {
+        pharmacyOrders = res.data.admin_pharmacyOrders
+    }).catch(err => console.log(err))
+
+    return pharmacyOrders
+}
+
+async function checkIsBlackListed(context, id) {
+    let isBlackListed
+    await context.$apollo.query({
+        query: gql `query{
+            admin_isBlackListed(pharmacyId: "${id}")
+        }`,
+        fetchPolicy: 'no-cache'
+    }).then((res) => {
+        isBlackListed = res.data.admin_isBlackListed
+    }).catch(err => console.log(err))
+
+    return isBlackListed
+}
+
+async function getDrugSellingValue(context, id) {
+    let sellingVal
+    await context.$apollo.query({
+        query: gql `query{
+            admin_getDrugSellingValue(id: "${id}")
+        }`
+    }).then((res) => {
+        sellingVal = res.data.admin_getDrugSellingValue
+    }).catch(err => console.log(err))
+
+    return sellingVal
+}
+
+async function getDrugsWtihSellingValue(context) {
+    let drugs
+    await context.$apollo.query({
+        query: gql `query{
+            admin_getDrugsWtihSellingValue
+        }`
+    }).then((res) => {
+        drugs = res.data.admin_getDrugsWtihSellingValue
+    }).catch(err => console.log(err))
+
+    return drugs
+}
+
+
+async function getDrugs(context) {
+    let drugs
+    await context.$apollo.query({
+            query: gql `query{
+            drugs(onlyCash: true){
+                name
+                id
+            }
+        }`
+        }).then(res => drugs = res.data.drugs)
+        .catch(err => console.log(err))
+
+    return drugs
+}
+
+async function getDrugStores(context, id) {
+    let stores
+    await context.$apollo.query({
+            query: gql `query{
+            admin_drug(id: "${id}"){
+                stores{
+                    store  
+                    price
+                    discount
+                    deferredDiscount
+                    onlyCash
+                }
+            }
+        }`
+        }).then(res => {
+            stores = res.data.admin_drug.stores
+        })
+        .catch(err => console.log(err))
+
+    return stores
+}
+
+async function getStoreName(context, id){
+    let storeName
+    await context.$apollo.query({
+        query: gql `query{
+            admin_store(id: "${id}"){
+                storeName
+            }
+        }`
+    }).then((res) => {
+        storeName = res.data.admin_store.storeName
+    }).catch(err => console.log(err))
+
+    return storeName
+}
+
 export {
     getTotalSales,
     getTotalSalesInThisMonth,
@@ -227,5 +435,17 @@ export {
     getPharmacyNameFromCode,
     getTopDrugsSelling,
     getOrders,
-    getOrder
+    getOrder,
+    getStores,
+    getPharmacies,
+    getPharmacy,
+    getStore,
+    getStoreOrders,
+    getPharmacyOrders,
+    checkIsBlackListed,
+    getDrugSellingValue,
+    getDrugs,
+    getDrugsWtihSellingValue,
+    getDrugStores,
+    getStoreName
 }

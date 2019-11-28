@@ -3,12 +3,12 @@ import Router from 'vue-router'
 import Header from '../components/shared/Header.vue'
 import Footer from '../components/shared/Footer.vue'
 import Home from '../views/Home'
-import EditProfile from '../components/profile/EditProfile'
-import UploadDrugs from '../components/drugs manegment/UploadDrugs'
-import DrugsList from '../components/drugs manegment/DrugsList.vue'
+import Profiles from '../views/Profiles.vue'
+import DrugsList from '../views/DrugsList.vue'
 import OrderList from '../views/OrderList.vue'
 import Login from '../components/Login.vue'
 import Signup from '../components/signup/Signup.vue'
+import UploadNew from '../components/drugs manegment/UploadDrugs.vue'
 
 Vue.use(Router)
 
@@ -42,16 +42,7 @@ export default new Router({
     name: 'Profiles',
     components: {
       header: Header,
-      main: EditProfile,
-      footer: Footer
-    }
-  },
-  {
-    path: '/upload-new',
-    name: 'UploadDrugs',
-    components: {
-      header: Header,
-      main: UploadDrugs,
+      main: Profiles,
       footer: Footer
     }
   },
@@ -61,6 +52,15 @@ export default new Router({
     components: {
       header: Header,
       main: DrugsList,
+      footer: Footer
+    }
+  },
+  {
+    path: '/upload-new',
+    name: 'DrugsList',
+    components: {
+      header: Header,
+      main: UploadNew,
       footer: Footer
     }
   },

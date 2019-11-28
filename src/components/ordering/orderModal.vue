@@ -20,7 +20,7 @@
             <div class="pharmacy-data">
               <p>
                 <span>Name:</span>
-                {{ order.pharmacyName }}
+                {{ order.from.pharmacyName }}
               </p>
               <p>
                 <span>Phone:</span>
@@ -38,7 +38,7 @@
             <div class="store-data">
               <p>
                 <span>Name:</span>
-                {{ order.storeName || 'test' }}
+                {{ order.to.storeName || 'test' }}
               </p>
               <p>
                 <span>Phone:</span>
@@ -150,6 +150,7 @@
 import { eventBus } from "../../main";
 import IosPrintIcon from "vue-ionicons/dist/ios-print.vue";
 import { orderAction } from "../../utils/Mutations";
+import { showSucessMessage, showErrorMessage } from '../../utils/messages';
 
 export default {
   components: {
@@ -190,7 +191,7 @@ export default {
   },
   methods: {
     close() {
-      eventBus.closeOrderModalStatus();
+      eventBus.closeOrderModal();
     },
     print() {
       this.$htmlToPaper("printable");
@@ -198,20 +199,10 @@ export default {
     async makeOrderAction(code, status) {
       let order = await orderAction(this, code, status);
       if (order) {
-        this.$message({
-          showClose: true,
-          duration: 2000,
-          message: `Order ${code} has been set to ${status} status`,
-          type: "success"
-        });
+        showSucessMessage(this, `Order ${code} has been set to ${status} status`)
         this.order.orderStatus = status
       } else {
-        this.$message({
-          showClose: true,
-          duration: 500,
-          message: `Error perfroming order action `,
-          type: "error"
-        });
+        showErrorMessage(this, `Error perfroming order action `)
       }
     }
   },
@@ -425,6 +416,6 @@ export default {
 .separator {
   width: 50%;
   border-width: 2px;
-  border-color: #ada7a7;
+  border-color: #dee2e6;
 }
 </style>

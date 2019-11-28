@@ -26,25 +26,7 @@
           <i class="fa fa-user"></i> Profiles
         </a>
       </router-link>
-      <!-- <li class="nav-item dropdown">
-        <a
-          class="nav-link with-sub"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <i class="fa fa-user"></i> Profiles
-          <IosArrowDownIcon w="10px" class="custom-icon" />
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <router-link to="/profile-page" active-class="active" class="dropdown-item">Profile Page</router-link>
-          <div class="dropdown-divider"></div>
-          <router-link to="/edit-profile" active-class="active" class="dropdown-item">Edit Profile</router-link>
-        </div>
-      </li> -->
+
       <li class="nav-item dropdown">
         <a
           class="nav-link with-sub"
@@ -362,14 +344,7 @@ export default {
   object-fit: cover;
   border-radius: 100%;
 }
-/* .border-left::after {
-  content: "";
-  position: absolute;
-  height: 18px;
-  left: 0;
-  border-left: 1px solid #ced4da ;
-  bottom: 10px;
-} */
+
 .main-nav > li{
   position: relative;
 }

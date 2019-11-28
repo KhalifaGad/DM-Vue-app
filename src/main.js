@@ -16,8 +16,14 @@ import VueHtmlToPaper from 'vue-html-to-paper';
 
 export const eventBus = new Vue({
   methods: {
-    closeOrderModalStatus(){
+    closeOrderModal(){
       this.$emit('closeOrderModal', false)
+    },
+    closeProfileModal(){
+      this.$emit('closeProfileModal', false)
+    },
+    closeDrugModal(){
+      this.$emit('closeDrugModal', false)
     }
   }
 })

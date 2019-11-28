@@ -59,8 +59,10 @@ import {
   getPendingOrdersCount,
   getDeliveredOrdersCount,
   getTopPhramacies,
-  getTopDrugsSelling
+  getTopDrugsSelling,
+  getDrugsWtihSellingValue
 } from "../utils/Queries";
+import { rejects } from 'assert';
 
 export default {
   components: {
