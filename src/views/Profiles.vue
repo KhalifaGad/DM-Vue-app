@@ -1,6 +1,45 @@
 <template>
   <div>
     <h2 class="content-title">Profiles</h2>
+
+    <section class="discount-ntfc-section">
+      <div class="content-label">Notifications</div>
+      <p class="mg-t-5">Send notifications based upone area.</p>
+      <!-- <h5>Send Notification:</h5> -->
+      <div class="first-layer">
+        <div class="az-form-group lg">
+          <label class="form-label">Notitfiaction Title</label>
+          <input
+            type="name"
+            v-model="ntfcTitle"
+            class="form-control"
+            placeholder="Eg: New Discount 🥳"
+          />
+        </div>
+        <div class="az-form-group">
+          <label class="form-label">Pharmacies Areas</label>
+          <v-select
+            class="form-control mg-t-15"
+            id="vSelectId"
+            v-model="selectedArea"
+            :options="areas"
+          />
+        </div>
+      </div>
+      <div class="second-layer">
+        <div class="az-form-group">
+          <label class="form-label">Notitfiaction Body</label>
+          <input
+            type="name"
+            v-model="ntfcBody"
+            class="form-control"
+            placeholder="Eg: horraaaay!, 2% discount hass been added to you 💃💃"
+          />
+        </div>
+        <button class="btn btn-dark" @click="snedNotification">Send</button>
+      </div>
+    </section>
+    <hr class="separator" />
     <div class="content-label mg-b-5">Phramacies & Stores</div>
     <p class="mg-b-20">Here you can deal with profiles of Drug1Market.</p>
 
@@ -57,21 +96,23 @@ import {
   getPharmacies,
   getStores,
   getPharmacy,
-  getStore
+  getStore,
+  getPharmaciesAreas
 } from "../utils/Queries";
 import ProfileModal from "../components/profile/profileModal";
 import { eventBus } from "../main";
+import { showErrorMessage, showSucessMessage } from "../utils/messages";
+import { sendNotificationByArea } from '../utils/Mutations';
 export default {
   data() {
     return {
-      areas: ["Smouha", "Sidi Gaber", "Al Agmy", "Kafr Abdo", "Roushdy"],
-      selectedArea: "Smouha",
-      cities: ["Alexandria", "Cairo", "Swiss", "South Sinai", "Mansoura"],
-      selectedCity: "Alexandria",
-      birthDate: "",
+      selectedArea: "",
+      ntfcTitle: "",
+      ntfcBody: "",
       activeTab: "",
       profiles: [],
       profile: {},
+      areas: [],
       tableKey: 1,
       profileModalStatus: false,
       titles: [
@@ -162,10 +203,32 @@ export default {
         };
       });
       this.prepareProfiles(pharmacies, stores);
+    },
+    async snedNotification() {
+      if (!this.selectedArea || !this.ntfcBody || !this.ntfcTitle) {
+        showErrorMessage(this, "Can not perform, wrong data provided");
+        return;
+      }
+      let isSent = await sendNotificationByArea(
+        this,
+        this.selectedArea,
+        this.ntfcTitle,
+        this.ntfcBody
+      );
+      if(isSent){
+        showSucessMessage(this, "Notification has bees successfully sent");
+        this.selectedArea  = ""
+        this.ntfcBody = ""
+        this.ntfcTitle = ""
+      } else {
+        showErrorMessage(this, "Error sending notification")
+      }
     }
   },
-  created() {
-    this.updateUI()
+  async created() {
+    this.updateUI();
+    let areas = await getPharmaciesAreas(this);
+    this.areas = areas.filter(area => area != null);
   },
   mounted() {
     eventBus.$on("closeProfileModal", flage => {
@@ -275,34 +338,68 @@ export default {
 .table-tabs {
   width: 85%;
 }
-/* .el-message .el-icon-info {
-    color: #909399;
-    ui element styling
-    display: none
-} */
 .table-tab + .table-tab {
   margin-left: 3px;
 }
+.discount-ntfc-section .first-layer,
+.discount-ntfc-section .second-layer,
+.black-list-section {
+  display: flex;
+  flex-direction: row;
+}
+.discount-ntfc-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4%;
+}
+.discount-ntfc-section h5 {
+  margin-right: 5%;
+  font-size: 1.5em;
+  margin-top: 1.7%;
+}
+.discount-ntfc-section .second-layer button,
+.discount-ntfc-section button {
+  margin-left: 2%;
+  height: 40px;
+  width: 80px;
+  font-weight: bold;
+  color: #fff;
+  border-width: 0;
+  outline: none;
+}
+.black:disabled {
+  background-color: #70737c;
+}
+.discount-ntfc-section .first-layer {
+  margin-top: 1%;
+}
+.discount-ntfc-section .first-layer .az-form-group + .az-form-group {
+  margin-left: 4%;
+}
+.discount-ntfc-section .first-layer .az-form-group {
+  width: 40%;
+  margin-top: 0;
+}
+.discount-ntfc-section .second-layer {
+  margin-top: 2%;
+  align-items: flex-end;
+}
+.discount-ntfc-section .second-layer .az-form-group {
+  width: 70%;
+}
+.discount-ntfc-section .first-layer .az-form-group {
+  width: 33%;
+}
+.discount-ntfc-section .second-layer button {
+  width: 10%;
+  margin-left: 4%;
+}
+.separator {
+  width: 50%;
+  border-width: 2px;
+  border-color: #dee2e6;
+  margin-top: 6%;
+  margin-bottom: 6%;
+}
 </style>
-<!-- <div class="wd-xl-100p">
-      <div class="row row-xs">
-        <div class="col-md-3 mg-t-20">
-          <div class="az-form-group">
-            <label class="form-label">First Name</label>
-            <input
-              type="name"
-              class="form-control"
-              placeholder="Your First Name"
-              @focus="toggleFocus"
-              @blur="toggleFocus"
-            />
-          </div>
-        </div>
-        <div class="col-md-3 pd-l-0">
-          <div class="az-form-group">
-            <label class="form-label">City</label>
-            <v-select class="form-control" id="vSelectId" :options="cities" v-model="selectedCity" />
-          </div>
-        </div>
-      </div>
-    </div> -->
+

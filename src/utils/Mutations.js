@@ -69,10 +69,58 @@ async function addDiscount2Pharmacy(context, id, ratio) {
     return isAdded
 }
 
+async function updateDrugName(context, oldName, newName) {
+    let isUpdated
+    await context.$apollo.mutate({
+            mutation: gql `mutation {
+                    admin_updateDrugName(
+                        oldName: "${oldName}",
+                        newName: "${newName}"
+                    )
+                }`
+        }).then(res => isUpdated = res.data.admin_updateDrugName)
+        .catch(err => console.log(err))
+
+    return isUpdated
+}
+
+async function addDrug(context, name) {
+    let drugId
+    await context.$apollo.mutate({
+            mutation: gql `mutation {
+                    addDrug(
+                        name: "${name}"
+                    )
+                }`
+        }).then(res => drugId = res.data.addDrug)
+        .catch(err => console.log(err))
+
+    return drugId ? true : false
+}
+
+async function sendNotificationByArea(context, area, title, body) {
+    let isSent
+    await context.$apollo.mutate({
+            mutation: gql `mutation {
+                    admin_sendNotificationByArea(
+                        area: "${area}",
+                        title: "${title}",
+                        body: "${body}",
+                    )
+                }`
+        }).then(res => isSent = res.data.admin_sendNotificationByArea)
+        .catch(err => console.log(err))
+
+    return isSent
+}
+
 export {
     orderAction,
     add2BlackList,
     removeFromBlackList,
     sendNotification2Pharmacy,
-    addDiscount2Pharmacy
+    addDiscount2Pharmacy,
+    updateDrugName,
+    addDrug,
+    sendNotificationByArea
 }

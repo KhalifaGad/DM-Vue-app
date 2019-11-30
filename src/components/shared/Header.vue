@@ -43,7 +43,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <router-link to="/drugs-list" active-class="active" class="dropdown-item">Drug List</router-link>
           <div class="dropdown-divider"></div>
-          <router-link to="/upload-new" active-class="active" class="dropdown-item">Upload New</router-link>
+          <router-link to="/drug-actions" active-class="active" class="dropdown-item">Drug Actions</router-link>
         </div>
       </li>
       <li class="nav-item dropdown">

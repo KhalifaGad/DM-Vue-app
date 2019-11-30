@@ -39,7 +39,7 @@
         <topDrugs :topDrugs="topDrugs" />
       </div>
       <div class="col-lg-4 mg-t-20">
-        <topPharmaciesCard :pharmacies="topPharmacies" />
+        <topPharmaciesCard :key="topPharmaciesKey" :pharmacies="topPharmacies" />
       </div>
     </div>
   </div>
@@ -62,7 +62,6 @@ import {
   getTopDrugsSelling,
   getDrugsWtihSellingValue
 } from "../utils/Queries";
-import { rejects } from 'assert';
 
 export default {
   components: {
@@ -78,6 +77,7 @@ export default {
       pharmaciesCount: 0,
       storesCount: 0,
       totalOrders: 0,
+      topPharmaciesKey: 0,
       pendingOrdersCount: 0,
       deliveriedOrdersCount: 0,
       topPharmacies: [],
@@ -185,6 +185,7 @@ export default {
       pendingOrdersCount,
       deliveriedOrdersCount
     );
+    getDrugsWtihSellingValue(this);
   }
 };
 </script>

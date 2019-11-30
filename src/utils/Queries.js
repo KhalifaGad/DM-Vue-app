@@ -108,7 +108,8 @@ async function getTopPhramacies(context) {
     await context.$apollo.query({
         query: gql ` query{
             admin_topPharmacies
-        }`
+        }`,
+        fetchPolicy: 'no-cache'
     }).then((res) => {
         topPharmacies = res.data.admin_topPharmacies
     }).catch(err => console.log(err))
@@ -136,7 +137,8 @@ async function getTopDrugsSelling(context) {
     await context.$apollo.query({
         query: gql ` query{
             admin_topDrugsSellingByValue
-        }`
+        }`,
+        fetchPolicy: 'no-cache'
     }).then((res) => {
         topDrugs = res.data.admin_topDrugsSellingByValue
     }).catch(err => console.log(err))
@@ -386,6 +388,21 @@ async function getDrugs(context) {
     return drugs
 }
 
+async function getDrugsName(context) {
+    let drugs
+    await context.$apollo.query({
+            query: gql `query{
+            drugs(onlyCash: true){
+                name
+            }
+        }`,
+            fetchPolicy: 'no-cache'
+        }).then(res => drugs = res.data.drugs)
+        .catch(err => console.log(err))
+
+    return drugs
+}
+
 async function getDrugStores(context, id) {
     let stores
     await context.$apollo.query({
@@ -408,7 +425,7 @@ async function getDrugStores(context, id) {
     return stores
 }
 
-async function getStoreName(context, id){
+async function getStoreName(context, id) {
     let storeName
     await context.$apollo.query({
         query: gql `query{
@@ -421,6 +438,18 @@ async function getStoreName(context, id){
     }).catch(err => console.log(err))
 
     return storeName
+}
+
+async function getPharmaciesAreas(context) {
+    let areas
+    await context.$apollo.query({
+            query: gql `query{
+            admin_pharmaciesArea
+        }`
+        }).then((res) => areas = res.data.admin_pharmaciesArea)
+        .catch(err => console.log(err))
+
+        return areas
 }
 
 export {
@@ -447,5 +476,7 @@ export {
     getDrugs,
     getDrugsWtihSellingValue,
     getDrugStores,
-    getStoreName
+    getStoreName,
+    getDrugsName,
+    getPharmaciesAreas
 }

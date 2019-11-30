@@ -8,7 +8,7 @@ import DrugsList from '../views/DrugsList.vue'
 import OrderList from '../views/OrderList.vue'
 import Login from '../components/Login.vue'
 import Signup from '../components/signup/Signup.vue'
-import UploadNew from '../components/drugs manegment/UploadDrugs.vue'
+import DrugActions from "../views/DrugActions.vue"
 
 Vue.use(Router)
 
@@ -56,11 +56,11 @@ export default new Router({
     }
   },
   {
-    path: '/upload-new',
+    path: '/drug-actions',
     name: 'DrugsList',
     components: {
       header: Header,
-      main: UploadNew,
+      main: DrugActions,
       footer: Footer
     }
   },
